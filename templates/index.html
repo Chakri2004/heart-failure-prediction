@@ -1,67 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="/static/style.css">
+    <meta charset="UTF-8">
     <title>Heart Failure Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-<h1>Heart Failure Prediction</h1>
-<div class="card">
-    <form action="/predict" method="POST">
-        <div class="grid">
-            <div>
-                <label>Age</label>
-                <input name="age" required>
-            </div>
-            <div>
-                <label>Anaemia (0/1)</label>
-                <input name="anaemia" required>
-            </div>
-            <div>
-                <label>Creatinine Phosphokinase</label>
-                <input name="creatinine_phosphokinase" required>
-            </div>
-            <div>
-                <label>Diabetes (0/1)</label>
-                <input name="diabetes" required>
-            </div>
-            <div>
-                <label>Ejection Fraction</label>
-                <input name="ejection_fraction" required>
-            </div>
-            <div>
-                <label>High Blood Pressure (0/1)</label>
-                <input name="high_blood_pressure" required>
-            </div>
 
-            <div>
-                <label>Platelets</label>
-                <input name="platelets" required>
-            </div>
-            <div>
-                <label>Serum Creatinine</label>
-                <input name="serum_creatinine" required>
-            </div>
-            <div>
-                <label>Serum Sodium</label>
-                <input name="serum_sodium" required>
-            </div>
-            <div>
-                <label>Sex (0=F, 1=M)</label>
-                <input name="sex" required>
-            </div>
-            <div>
-                <label>Smoking (0/1)</label>
-                <input name="smoking" required>
-            </div>
-            <div>
-                <label>Follow-up Time</label>
-                <input name="time" required>
-            </div>
+<div class="container">
+    <h1>🫀 Heart Failure Prediction</h1>
+    <p class="subtitle">AI-powered cardiovascular risk assessment system</p>
+    <h2 class="section-title">👤 Manual Patient Entry</h2>
+    <form action="/predict" method="post" class="form-grid">
+        <div class="input-group">
+            <label>Age</label>
+            <input type="number" name="age" placeholder="Years" required>
         </div>
-        <button class="btn" type="submit">Predict</button>
-        <p class="note">Fill all fields correctly before predicting the heart failure risk.</p>
+
+        <div class="input-group">
+            <label>Anaemia</label>
+            <input type="number" name="anaemia" placeholder="0 or 1" required>
+        </div>
+
+        <div class="input-group">
+            <label>CPK</label>
+            <input type="number" name="creatinine_phosphokinase" placeholder="Creatinine Phosphokinase" required>
+        </div>
+
+        <div class="input-group">
+            <label>Diabetes</label>
+            <input type="number" name="diabetes" placeholder="0 or 1" required>
+        </div>
+
+        <div class="input-group">
+            <label>Ejection Fraction (%)</label>
+            <input type="number" name="ejection_fraction" placeholder="%" required>
+        </div>
+
+        <div class="input-group">
+            <label>High Blood Pressure</label>
+            <input type="number" name="high_blood_pressure" placeholder="0 or 1" required>
+        </div>
+
+        <div class="input-group">
+            <label>Platelets</label>
+            <input type="number" name="platelets" placeholder="Platelet count" required>
+        </div>
+
+        <div class="input-group">
+            <label>Serum Creatinine</label>
+            <input type="number" step="0.01" name="serum_creatinine" placeholder="mg/dL" required>
+        </div>
+
+        <div class="input-group">
+            <label>Serum Sodium</label>
+            <input type="number" name="serum_sodium" placeholder="mEq/L" required>
+        </div>
+
+        <div class="input-group">
+            <label>Sex</label>
+            <input type="number" name="sex" placeholder="0 = Female, 1 = Male" required>
+        </div>
+
+        <div class="input-group">
+            <label>Smoking</label>
+            <input type="number" name="smoking" placeholder="0 or 1" required>
+        </div>
+
+        <div class="input-group">
+            <label>Follow-up Time</label>
+            <input type="number" name="time" placeholder="Days" required>
+        </div>
+        <button type="submit" class="btn">Predict Risk</button>
     </form>
+    <hr>
+    <h2 class="section-title">📂 Batch Prediction</h2>
+    <p class="subtitle">
+        Upload CSV / Excel file for bulk patient risk analysis
+    </p>
+
+    <form action="/upload" method="post" enctype="multipart/form-data" class="upload-box">
+        <input type="file" name="file" accept=".csv,.xlsx" required>
+        <button type="submit" class="btn">⬆ Upload & Predict</button>
+    </form>
+
 </div>
 </body>
 </html>
