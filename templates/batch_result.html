@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Batch Prediction Summary</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            background: linear-gradient(135deg, #e3f2fd, #fdfefe);
+            padding: 40px;
+        }
+
+        .batch-container {
+            max-width: 1000px;
+            margin: auto;
+            background: #ffffff;
+            padding: 45px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+        }
+
+        .batch-header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .batch-header h1 {
+            color: #102a43;
+            margin-bottom: 8px;
+        }
+
+        .batch-header p {
+            color: #5c6b7a;
+            font-size: 15px;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin: 35px 0;
+        }
+
+        .summary-card {
+            padding: 28px;
+            border-radius: 18px;
+            text-align: center;
+            background: #f5faff;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            font-size: 18px;
+        }
+
+        .summary-card h3 {
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .summary-card p {
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .summary-card.high {
+            background: linear-gradient(135deg, #ffebee, #ffcdd2);
+            color: #b71c1c;
+        }
+
+        .summary-card.low {
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            color: #1b5e20;
+        }
+
+        .action-buttons {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .download-btn {
+            display: inline-block;
+            padding: 14px 30px;
+            background: linear-gradient(135deg, #1e88e5, #1565c0);
+            color: white;
+            border-radius: 14px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.25s ease;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(30,136,229,0.4);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 25px;
+            text-decoration: none;
+            color: #1e88e5;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="batch-container">
+    <div class="batch-header">
+        <h1>Batch Prediction Summary</h1>
+        <p>Automated heart failure risk analysis for uploaded patient data</p>
+    </div>
+
+    <div class="summary-grid">
+        <div class="summary-card">
+            <h3>Total Records</h3>
+            <p>{{ total }}</p>
+        </div>
+
+        <div class="summary-card high">
+            <h3>High Risk Patients</h3>
+            <p>{{ high }}</p>
+        </div>
+
+        <div class="summary-card low">
+            <h3>Low Risk Patients</h3>
+            <p>{{ low }}</p>
+        </div>
+    </div>
+
+    <div class="action-buttons">
+        <a href="/" class="back-link">← Back to Home</a>
+    </div>
+
+</div>
+</body>
+</html>
