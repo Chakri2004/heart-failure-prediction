@@ -1,53 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <link rel="stylesheet" href="/static/style.css">
     <title>Prediction Result</title>
-    <style>
-        .img {
-            width: 80%;
-            margin: 20px auto;
-            display: block;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-        .section-title {
-            margin-bottom: 10px;
-            font-size: 22px;
-            font-weight: bold;
-            color: #333;
-        }
-        .download-btn {
-            display: inline-block;
-            padding: 10px 20px;
-            background: #008060;
-            color: white;
-            border-radius: 6px;
-            text-decoration: none;
-            margin-top: 15px;
-            font-size: 16px;
-        }
-        .download-btn:hover {
-            background: #006847;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-<h1>Heart Failure Prediction Result</h1>
-
-<div class="result-card">
-    <h2>Patient Probability Result</h2>
-
-    {% if probability > 0.5 %}
-        <p class="danger">HIGH RISK: {{ probability }}</p>
-    {% else %}
-        <p class="safe">✔️ LOW RISK: {{ probability }}</p>
-    {% endif %}
-    <a href="/" class="back-btn">Go Back</a>
-</div>
-<div class="card">
-    <h2 class="section-title">Risk Factors Contribution</h2>
-    {{ graph | safe }}
+<div class="container">
+    <h1>🧠 Prediction Result</h1>
+    <p class="subtitle">Individual patient risk assessment</p>
+    <div class="result-card {{ 'high' if risk=='HIGH RISK' else 'low' }}">
+        {{ risk }}<br>
+        Probability: {{ probability }}
+    </div>
+    <div class="graph-box">
+        {{ graph | safe }}
+    </div>
+    <a href="/" class="btn">Back</a>
 </div>
 </body>
 </html>
